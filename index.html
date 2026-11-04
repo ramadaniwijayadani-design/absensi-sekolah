@@ -7,7 +7,77 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Absensi SMKS Diponegoro</title>
-<link rel="stylesheet" href="theme.css?v=green-v3-2041">
+<link rel="stylesheet" href="theme.css?v=green-v4-2051">
+<style>
+:root {
+    --school-green: #0a5c43;
+    --school-green-bright: #149d66;
+    --school-mint: #e9f7ef;
+    --school-border: #dce9e1;
+}
+
+body {
+    background: #eef5f1 !important;
+}
+
+#loginAdmin {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, .16), transparent 28%),
+        linear-gradient(145deg, #073c2d 0%, var(--school-green) 58%, var(--school-green-bright) 100%) !important;
+}
+
+.login-panel {
+    border: 1px solid rgba(255, 255, 255, .7) !important;
+    box-shadow: 0 24px 70px rgba(0, 32, 22, .28) !important;
+}
+
+header {
+    background: linear-gradient(120deg, #073c2d 0%, var(--school-green) 58%, var(--school-green-bright) 100%) !important;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+}
+
+.card,
+.stat {
+    border-color: var(--school-border) !important;
+    box-shadow: 0 10px 30px rgba(7, 60, 45, .08) !important;
+}
+
+.stat {
+    border-left: none !important;
+    border-top: 4px solid var(--school-green-bright) !important;
+}
+
+button {
+    background: linear-gradient(135deg, var(--school-green), var(--school-green-bright)) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--school-green-bright) !important;
+    box-shadow: 0 0 0 3px rgba(20, 157, 102, .14) !important;
+}
+
+@media (max-width: 768px) {
+    header {
+        margin: 10px;
+        border-radius: 20px;
+    }
+
+    .container {
+        margin-top: 6px !important;
+    }
+
+    .card {
+        border-radius: 16px !important;
+    }
+
+    tbody tr {
+        border-left: 4px solid var(--school-green-bright) !important;
+    }
+}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
