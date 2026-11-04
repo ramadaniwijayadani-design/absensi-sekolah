@@ -629,4 +629,22 @@ td:first-child {
         font-size: 13px;
     }
 }
+
+.rekap-filter {
+    display: grid;
+    grid-template-columns: minmax(220px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.rekap-filter input,
+.rekap-filter select {
+    margin-top: 0;
+}
+
+@media(max-width:700px) {
+    .rekap-filter {
+        grid-template-columns: 1fr;
+    }
+}
 ```
