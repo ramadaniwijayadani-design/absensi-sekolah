@@ -1,4 +1,3 @@
-```css
 /* ===============================
    RESET & DASAR
 ================================ */
@@ -717,4 +716,138 @@ td:first-child {
         margin-top: 16px;
     }
 }
-```
+
+/* ===== TEMA SIMPLE MOBILE ABSENSI ===== */
+
+@media (max-width: 768px) {
+    body {
+        background: #f8fafc !important;
+        color: #1e293b;
+        font-family: Arial, sans-serif;
+    }
+
+    header {
+        padding: 25px 15px !important;
+        background: #ffffff !important;
+        color: #065f46 !important;
+        box-shadow: none !important;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    header h1 {
+        font-size: 22px !important;
+        letter-spacing: 0 !important;
+        text-shadow: none !important;
+    }
+
+    .container {
+        margin: 15px auto !important;
+        padding: 12px !important;
+    }
+
+    .card {
+        background: #ffffff !important;
+        padding: 18px !important;
+        border-radius: 14px !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+        border: 1px solid #e5e7eb !important;
+        margin-bottom: 15px !important;
+        backdrop-filter: none !important;
+    }
+
+    .card h2 {
+        font-size: 19px;
+        color: #047857 !important;
+    }
+
+    input,
+    select {
+        background: #ffffff !important;
+        border: 1px solid #d1d5db !important;
+        border-radius: 10px !important;
+        padding: 12px !important;
+        font-size: 14px !important;
+        margin-top: 10px !important;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #059669 !important;
+        box-shadow: 0 0 0 2px #d1fae5 !important;
+    }
+
+    button {
+        background: #059669 !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+        font-size: 14px !important;
+        padding: 12px !important;
+        margin-top: 10px !important;
+    }
+
+    .stats {
+        gap: 10px !important;
+    }
+
+    .stat {
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-bottom: 3px solid #10b981 !important;
+        border-radius: 12px !important;
+        box-shadow: none !important;
+        padding: 16px 8px !important;
+    }
+
+    .stat h2 {
+        font-size: 24px !important;
+        color: #059669 !important;
+    }
+
+    tbody tr {
+        background: #ffffff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 12px !important;
+        padding: 10px 14px !important;
+        margin-bottom: 12px !important;
+        box-shadow: none !important;
+    }
+
+    tbody td {
+        padding: 10px 0 !important;
+        min-height: 38px !important;
+        border-bottom: 1px solid #f1f5f9 !important;
+        font-size: 13px !important;
+    }
+
+    tbody td::before {
+        color: #64748b !important;
+        font-size: 12px !important;
+    }
+
+    tbody td:last-child {
+        border-bottom: none !important;
+    }
+
+    .status {
+        background: #dcfce7 !important;
+        color: #15803d !important;
+        border-radius: 6px !important;
+        padding: 5px 10px !important;
+    }
+
+    .hapus {
+        width: 38px !important;
+        min-width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        background: #ef4444 !important;
+        border-radius: 8px !important;
+        font-size: 16px !important;
+    }
+
+    .card:hover,
+    .stat:hover,
+    button:hover {
+        transform: none !important;
+    }
+}
