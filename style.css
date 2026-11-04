@@ -1044,11 +1044,3 @@ body.user-mode .admin-action {
 .login-panel #role {
     margin-bottom: 2px;
 }
-
-.login-panel #loginHint {
-    display: block;
-    margin-top: 8px;
-    color: #60766a;
-    font-size: 12px;
-    text-align: center;
-}

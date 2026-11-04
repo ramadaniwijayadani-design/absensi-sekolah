@@ -119,7 +119,7 @@ th {
     }
 }
 </style>
-<link rel="stylesheet" href="style.css?v=class-filter-20261104">
+<link rel="stylesheet" href="style.css?v=clean-login-20261104">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -140,7 +140,6 @@ th {
                autocomplete="username" autocapitalize="none" value="admin" autofocus>
         <input id="password" type="password" placeholder="Password Admin"
                autocomplete="current-password">
-        <small id="loginHint">Admin: username admin, password admin123</small>
         <button onclick="login()">Masuk ke Dashboard</button>
         <p id="pesan" style="color:red;"></p>
 
@@ -333,19 +332,16 @@ document.getElementById("username").addEventListener("keydown", function(event) 
 document.getElementById("role").addEventListener("change", function() {
     const username = document.getElementById("username");
     const password = document.getElementById("password");
-    const hint = document.getElementById("loginHint");
     if (this.value === "user") {
         username.placeholder = "Nama User";
         password.placeholder = "Password User";
         username.value = "user";
         password.value = "user123";
-        hint.textContent = "User: username user, password user123";
     } else {
         username.placeholder = "Nama Admin";
         password.placeholder = "Password Admin";
         username.value = "admin";
         password.value = "admin123";
-        hint.textContent = "Admin: username admin, password admin123";
     }
 });
 
