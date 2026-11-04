@@ -231,7 +231,7 @@ th {
                         <th>Kelas</th>
                         <th>Status</th>
                         <th>Waktu</th>
-                        <th class="admin-action">Aksi</th>
+                        <th class="admin-action admin-only">Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="dataAbsensi"></tbody>
@@ -282,6 +282,7 @@ async function login() {
 
     if (username === "admin" && (password === "admin123" || password === "admin")) {
         isAdmin = true;
+        document.body.classList.add("admin-mode");
         localStorage.setItem("admin_username", username);
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
@@ -371,6 +372,15 @@ function tampilkan() {
     });
 
     hasil.forEach((d, i) => {
+        const actionCell = isAdmin ? `
+                <td data-label="Aksi" class="admin-action">
+                    <button class="hapus" title="Hapus data"
+                    onclick="hapus(${data.indexOf(d)})">
+                    <span aria-hidden="true">🗑</span>
+                    <span class="sr-only">Hapus</span>
+                    </button>
+                </td>` : "";
+
         tbody.innerHTML += `
             <tr>
                 <td data-label="No">${i + 1}</td>
@@ -378,13 +388,7 @@ function tampilkan() {
                 <td data-label="Kelas">${d.kelas}</td>
                 <td data-label="Status"><span class="status">${d.status}</span></td>
                 <td data-label="Waktu">${d.tanggal} ${d.waktu}</td>
-                <td data-label="Aksi" class="admin-action">
-                    <button class="hapus" title="Hapus data"
-                    onclick="hapus(${data.indexOf(d)})">
-                    <span aria-hidden="true">🗑</span>
-                    <span class="sr-only">Hapus</span>
-                    </button>
-                </td>
+                ${actionCell}
             </tr>
         `;
     });

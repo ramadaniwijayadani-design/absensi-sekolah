@@ -672,6 +672,49 @@ td:first-child {
 @media(max-width:700px) {
     .rekap-filter {
         grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 12px;
+    }
+}
+
+@media(max-width:700px) {
+    .admin-action {
+        display: none;
+    }
+
+    .admin-mode .admin-action {
+        display: grid;
+    }
+
+    tbody tr {
+        margin-bottom: 10px;
+        padding: 12px;
+    }
+
+    tbody td {
+        grid-template-columns: 76px minmax(0, 1fr);
+        min-height: 34px;
+        padding: 5px 0;
+        gap: 6px;
+        font-size: 14px;
+    }
+
+    .rekap-filter input,
+    .rekap-filter select {
+        margin: 0;
+    }
+
+    .section-heading {
+        margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+        font-size: 22px;
+    }
+
+    .export-button {
+        min-height: 46px;
+        margin-top: 16px;
     }
 }
 ```
