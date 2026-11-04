@@ -150,6 +150,9 @@ z-index:9999;">
                autocomplete="username" autocapitalize="none" value="admin" autofocus>
         <input id="password" type="password" placeholder="Password Admin"
                autocomplete="current-password">
+        <input id="supabaseKey" type="password"
+               placeholder="Supabase Anon/Public Key"
+               autocomplete="off" autocapitalize="none">
         <button onclick="login()">LOGIN ADMIN</button>
         <p id="pesan" style="color:red;"></p>
 
@@ -267,10 +270,15 @@ async function login() {
         return;
     }
 
-    let key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
+    let key = window.SUPABASE_ANON_KEY ||
+        document.getElementById("supabaseKey").value.trim() ||
+        localStorage.getItem("supabase_anon_key");
     if (!key) {
-        key = window.prompt("Masukkan Supabase Anon/Public Key:");
-        if (!key) return;
+        pesan.textContent = "Isi Supabase Anon/Public Key terlebih dahulu.";
+        document.getElementById("supabaseKey").focus();
+        return;
+    }
+    if (!window.SUPABASE_ANON_KEY) {
         localStorage.setItem("supabase_anon_key", key.trim());
     }
 
@@ -290,10 +298,18 @@ async function login() {
         return;
     }
 
-    pesan.textContent = "Username atau password salah, atau akun belum dibuat.";
+    pesan.textContent = error.message === "Invalid login credentials"
+        ? "Username atau password salah. Coba password lama: admin123."
+        : error.message;
 }
 
 document.getElementById("password").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        login();
+    }
+});
+
+document.getElementById("supabaseKey").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         login();
     }
@@ -445,6 +461,11 @@ restoreSession();
 const savedUsername = localStorage.getItem("admin_username");
 if (savedUsername) {
     document.getElementById("username").value = savedUsername;
+}
+
+const savedKey = localStorage.getItem("supabase_anon_key");
+if (savedKey) {
+    document.getElementById("supabaseKey").value = savedKey;
 }
 </script>
 
