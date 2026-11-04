@@ -631,7 +631,7 @@ td:first-child {
 
 .rekap-filter {
     display: grid;
-    grid-template-columns: minmax(220px, 2fr) minmax(150px, 1fr) minmax(150px, 1fr);
+    grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(150px, 1fr));
     gap: 12px;
     margin-top: 18px;
 }

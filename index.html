@@ -119,7 +119,7 @@ th {
     }
 }
 </style>
-<link rel="stylesheet" href="style.css?v=login-fixed-20261104">
+<link rel="stylesheet" href="style.css?v=class-filter-20261104">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -223,6 +223,9 @@ th {
                 <option value="Izin">Izin</option>
                 <option value="Sakit">Sakit</option>
                 <option value="Alpa">Alpa</option>
+            </select>
+            <select id="filterKelas" onchange="tampilkan()">
+                <option value="">Semua Kelas / Jurusan</option>
             </select>
             <input type="date" id="filterTanggal" onchange="tampilkan()">
         </div>
@@ -402,14 +405,27 @@ function tampilkan() {
     let cari = document.getElementById("cari").value.toLowerCase();
     let filterStatus = document.getElementById("filterStatus").value;
     let filterTanggal = document.getElementById("filterTanggal").value;
+    let filterKelas = document.getElementById("filterKelas").value;
 
     tbody.innerHTML = "";
+
+    const kelasList = [...new Set(data.map(d => d.kelas).filter(Boolean))]
+        .sort((a, b) => a.localeCompare(b, "id"));
+    const filterKelasElement = document.getElementById("filterKelas");
+    const selectedKelas = filterKelasElement.value;
+    filterKelasElement.innerHTML =
+        '<option value="">Semua Kelas / Jurusan</option>' +
+        kelasList.map(kelas =>
+            `<option value="${kelas.replace(/"/g, "&quot;")}">${kelas}</option>`
+        ).join("");
+    filterKelasElement.value = kelasList.includes(selectedKelas) ? selectedKelas : "";
 
     let hasil = data.filter(d => {
         const cocokNama = d.nama.toLowerCase().includes(cari);
         const cocokStatus = !filterStatus || d.status === filterStatus;
         const cocokTanggal = !filterTanggal || d.tanggalKey === filterTanggal;
-        return cocokNama && cocokStatus && cocokTanggal;
+        const cocokKelas = !filterKelas || d.kelas === filterKelas;
+        return cocokNama && cocokStatus && cocokTanggal && cocokKelas;
     });
 
     hasil.forEach((d, i) => {
@@ -501,7 +517,10 @@ async function muatData() {
         return;
     }
 
-    data = records || [];
+    data = (records || []).map(record => ({
+        ...record,
+        tanggalKey: record.created_at ? record.created_at.slice(0, 10) : ""
+    }));
     tampilkan();
 }
 
