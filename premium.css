@@ -118,7 +118,11 @@ thead { background: linear-gradient(135deg, rgba(16, 185, 129, .92), rgba(8, 145
 th { padding: 15px; color: var(--gold); text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
 td { padding: 14px 15px; color: #dcfce7; font-size: 14px; border-bottom: 1px solid var(--border); }
 tbody tr:hover { background: rgba(22, 163, 74, .12); }
-.status { display: inline-block; padding: 6px 12px; border-radius: 20px; background: rgba(250, 204, 21, .12); color: var(--gold); font-weight: 700; }
+.status { display: inline-block; min-width: 78px; padding: 7px 12px; border-radius: 999px; text-align: center; font-size: 12px; font-weight: 700; }
+.status-hadir { color: #6ee7b7; background: rgba(16, 185, 129, .13); }
+.status-izin { color: #fbbf24; background: rgba(251, 191, 36, .13); }
+.status-sakit { color: #7dd3fc; background: rgba(14, 165, 233, .13); }
+.status-alpa { color: #fda4af; background: rgba(244, 63, 94, .13); }
 
 .hapus { width: 38px !important; padding: 8px !important; background: var(--red) !important; color: white; }
 .admin-action { width: 72px; text-align: center; }

@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Absensi SMKS Diponegoro</title>
-<link rel="stylesheet" href="premium.css?v=premium-teal-gold-2229">
+<link rel="stylesheet" href="premium.css?v=premium-teal-gold-2232">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -116,11 +116,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>No</th>
                         <th>Nama</th>
                         <th>Kelas</th>
                         <th>Status</th>
-                        <th>Waktu</th>
                         <th class="admin-action admin-only">Aksi</th>
                     </tr>
                 </thead>
@@ -291,7 +289,7 @@ function tampilkan() {
         return cocokNama && cocokStatus && cocokTanggal && cocokKelas;
     });
 
-    hasil.forEach((d, i) => {
+    hasil.forEach((d) => {
         const actionCell = isAdmin ? `
                 <td data-label="Aksi" class="admin-action">
                     <button class="hapus" title="Hapus data"
@@ -303,11 +301,9 @@ function tampilkan() {
 
         tbody.innerHTML += `
             <tr>
-                <td data-label="No">${i + 1}</td>
                 <td data-label="Nama">${d.nama}</td>
                 <td data-label="Kelas">${d.kelas}</td>
-                <td data-label="Status"><span class="status">${d.status}</span></td>
-                <td data-label="Waktu">${d.tanggal} ${d.waktu}</td>
+                <td data-label="Status"><span class="status status-${String(d.status).toLowerCase()}">${d.status}</span></td>
                 ${actionCell}
             </tr>
         `;
