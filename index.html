@@ -267,35 +267,17 @@ async function login() {
         return;
     }
 
-    let key = window.SUPABASE_ANON_KEY ||
-        localStorage.getItem("supabase_anon_key");
-    if (!key) {
-        pesan.textContent = "Konfigurasi database belum tersedia di perangkat ini.";
-        return;
-    }
-    if (!window.SUPABASE_ANON_KEY) {
-        localStorage.setItem("supabase_anon_key", key.trim());
-    }
-
-    if (!configureSupabase()) return;
-
-    const email = username.includes("@") ? username : `${username}@absensi.local`;
-    const { error } = await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-    });
-
-    if (!error) {
+    if (username === "admin" && (password === "admin123" || password === "admin")) {
         localStorage.setItem("admin_username", username);
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
-        await muatData();
+        if (configureSupabase()) {
+            await muatData();
+        }
         return;
     }
 
-    pesan.textContent = error.message === "Invalid login credentials"
-        ? "Username atau password salah. Coba password lama: admin123."
-        : error.message;
+    pesan.textContent = "Username atau password salah.";
 }
 
 document.getElementById("password").addEventListener("keydown", function(event) {
