@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Absensi Sekolah</title>
 <style>
 * {
@@ -343,12 +343,12 @@ function tampilkan() {
     hasil.forEach((d, i) => {
         tbody.innerHTML += `
             <tr>
-                <td>${i + 1}</td>
-                <td>${d.nama}</td>
-                <td>${d.kelas}</td>
-                <td><span class="status">${d.status}</span></td>
-                <td>${d.tanggal} ${d.waktu}</td>
-                <td>
+                <td data-label="No">${i + 1}</td>
+                <td data-label="Nama">${d.nama}</td>
+                <td data-label="Kelas">${d.kelas}</td>
+                <td data-label="Status"><span class="status">${d.status}</span></td>
+                <td data-label="Waktu">${d.tanggal} ${d.waktu}</td>
+                <td data-label="Aksi">
                     <button class="hapus"
                     onclick="hapus(${data.indexOf(d)})">
                     Hapus

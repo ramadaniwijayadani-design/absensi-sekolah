@@ -202,8 +202,18 @@ tr:hover {
 
 /* RESPONSIVE */
 @media(max-width: 700px) {
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
     .stats {
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     header h1 {
@@ -211,7 +221,9 @@ tr:hover {
     }
 
     .container {
-        padding: 12px;
+        width: 100%;
+        margin: 20px auto;
+        padding: 10px;
     }
 
     .card {
@@ -220,6 +232,66 @@ tr:hover {
 
     table {
         font-size: 12px;
+    }
+
+    table,
+    tbody {
+        display: block;
+        width: 100%;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        display: block;
+        margin-bottom: 14px;
+        padding: 8px 12px;
+        border: 1px solid #a7f3d0;
+        border-radius: 14px;
+        background: white;
+    }
+
+    tbody td {
+        display: grid;
+        grid-template-columns: 92px minmax(0, 1fr);
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 42px;
+        padding: 8px 0;
+        border-bottom: 1px solid #d1fae5;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+
+    tbody td:last-child {
+        border-bottom: none;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        color: #047857;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    tbody td:last-child::before {
+        align-self: start;
+        margin-top: 12px;
+    }
+
+    .hapus {
+        min-height: 44px;
+        margin-top: 0;
+    }
+
+    input,
+    select,
+    button {
+        min-height: 44px;
+        font-size: 16px;
     }
 
     #loginAdmin > div {
@@ -245,5 +317,37 @@ tr:hover {
     .school-subtitle {
         font-size: 15px;
         letter-spacing: 2px;
+    }
+}
+
+@media(max-width: 420px) {
+    header {
+        padding: 28px 12px 24px;
+    }
+
+    .school-logo {
+        width: 72px;
+        height: 72px;
+    }
+
+    .stats {
+        gap: 8px;
+    }
+
+    .stat {
+        padding: 18px 8px;
+    }
+
+    .stat h2 {
+        font-size: 26px;
+    }
+
+    .card {
+        padding: 16px 14px;
+        border-radius: 16px;
+    }
+
+    tbody td {
+        grid-template-columns: 78px minmax(0, 1fr);
     }
 }
