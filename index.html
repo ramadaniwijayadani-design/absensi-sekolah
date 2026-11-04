@@ -143,11 +143,13 @@ z-index:9999;">
     text-align:center;
     box-shadow:0 15px 40px #0003;">
 
-        <h2 style="color:#047857;">ADMIN LOGIN</h2>
+        <h2 style="color:#047857;">LOGIN ADMIN</h2>
         <p>Absensi Sekolah</p>
 
-        <input id="username" placeholder="Username Admin">
-        <input id="password" type="password" placeholder="Password Admin">
+        <input id="username" placeholder="Username Admin"
+               autocomplete="username" autocapitalize="none" autofocus>
+        <input id="password" type="password" placeholder="Password Admin"
+               autocomplete="current-password">
         <button onclick="login()">LOGIN ADMIN</button>
         <p id="pesan" style="color:red;"></p>
 
@@ -260,6 +262,11 @@ async function login() {
     const password = document.getElementById("password").value;
     const pesan = document.getElementById("pesan");
 
+    if (!username || !password) {
+        pesan.textContent = "Masukkan username dan password.";
+        return;
+    }
+
     let key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
     if (!key) {
         key = window.prompt("Masukkan Supabase Anon/Public Key:");
@@ -276,6 +283,7 @@ async function login() {
     });
 
     if (!error) {
+        localStorage.setItem("admin_username", username);
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
         await muatData();
@@ -288,6 +296,12 @@ async function login() {
 document.getElementById("password").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         login();
+    }
+});
+
+document.getElementById("username").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        document.getElementById("password").focus();
     }
 });
 
@@ -427,6 +441,11 @@ async function restoreSession() {
 }
 
 restoreSession();
+
+const savedUsername = localStorage.getItem("admin_username");
+if (savedUsername) {
+    document.getElementById("username").value = savedUsername;
+}
 </script>
 
 </body>
