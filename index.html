@@ -7,7 +7,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Absensi SMKS Diponegoro</title>
-<link rel="stylesheet" href="premium.css?v=premium-teal-gold-2234">
+<link rel="stylesheet" href="premium.css?v=premium-teal-gold-2240">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -144,6 +144,29 @@ let currentRole = "";
 
 function simpanDataLokal() {
     localStorage.setItem("absensi_lokal", JSON.stringify(data));
+}
+
+function tanggalKeISO(tanggal, createdAt) {
+    if (typeof tanggal === "string") {
+        const bagian = tanggal.trim().split("/");
+        if (bagian.length === 3) {
+            const [hari, bulan, tahun] = bagian;
+            return `${tahun.padStart(4, "0")}-${bulan.padStart(2, "0")}-${hari.padStart(2, "0")}`;
+        }
+    }
+    return createdAt ? createdAt.slice(0, 10) : "";
+}
+
+function rapikanRecord(record) {
+    return {
+        ...record,
+        nama: String(record.nama || "").trim(),
+        kelas: String(record.kelas || "").trim(),
+        status: String(record.status || "").trim(),
+        waktu: String(record.waktu || "").trim(),
+        tanggal: String(record.tanggal || "").trim(),
+        tanggalKey: tanggalKeISO(record.tanggal, record.created_at)
+    };
 }
 
 function configureSupabase() {
@@ -372,14 +395,20 @@ async function muatData() {
         .order("created_at", { ascending: false });
 
     if (error) {
+        data = JSON.parse(localStorage.getItem("absensi_lokal") || "[]").map(rapikanRecord);
+        tampilkan();
         alert(`Gagal memuat data: ${error.message}`);
         return;
     }
 
-    data = (records || []).map(record => ({
-        ...record,
-        tanggalKey: record.created_at ? record.created_at.slice(0, 10) : ""
-    }));
+    const unik = new Map();
+    (records || []).map(rapikanRecord).forEach(record => {
+        unik.set(String(record.id ?? `${record.nama}-${record.kelas}-${record.tanggal}-${record.waktu}`), record);
+    });
+    data = [...unik.values()].sort((a, b) =>
+        String(b.created_at || "").localeCompare(String(a.created_at || ""))
+    );
+    simpanDataLokal();
     tampilkan();
 }
 
