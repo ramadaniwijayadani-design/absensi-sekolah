@@ -642,6 +642,33 @@ td:first-child {
     margin-top: 0;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.admin-action {
+    text-align: center;
+    width: 72px;
+}
+
+.hapus {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 10px;
+    font-size: 17px;
+    line-height: 1;
+}
+
 @media(max-width:700px) {
     .rekap-filter {
         grid-template-columns: 1fr;
