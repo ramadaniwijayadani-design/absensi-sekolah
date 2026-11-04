@@ -295,11 +295,6 @@ document.getElementById("formAbsensi").addEventListener("submit", async function
     let kelas = document.getElementById("kelas").value.trim();
     let status = document.getElementById("status").value;
 
-    if (!supabaseClient) {
-        alert("Login terlebih dahulu.");
-        return;
-    }
-
     const waktuSekarang = new Date();
     if (!supabaseClient) {
         data.unshift({
