@@ -20,13 +20,9 @@
         <h2>Selamat Datang</h2>
         <p>Masuk untuk mengelola absensi sekolah</p>
 
-        <select id="role">
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-        </select>
-        <input id="username" placeholder="Nama Admin"
+        <input id="username" placeholder="Nama"
                autocomplete="off" autocapitalize="none" autofocus>
-        <input id="password" type="password" placeholder="Password Admin"
+        <input id="password" type="password" placeholder="Password"
                autocomplete="new-password">
         <button onclick="login()">Masuk ke Dashboard</button>
         <p id="pesan" style="color:red;"></p>
@@ -169,7 +165,7 @@ configureSupabase();
 async function login() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
-    const role = document.getElementById("role").value;
+    const name = username;
     const pesan = document.getElementById("pesan");
 
     if (!username || !password) {
@@ -177,7 +173,7 @@ async function login() {
         return;
     }
 
-    if (role === "admin" && username === "admin" && (password === "admin123" || password === "admin")) {
+    if (name === "admin" && (password === "admin123" || password === "admin")) {
         isAdmin = true;
         currentRole = "admin";
         document.body.classList.add("admin-mode");
@@ -190,7 +186,7 @@ async function login() {
         return;
     }
 
-    if (role === "user" && username === "user" && password === "user123") {
+    if (name === "user" && password === "user123") {
         isAdmin = false;
         currentRole = "user";
         document.body.classList.remove("admin-mode");
@@ -214,18 +210,6 @@ document.getElementById("password").addEventListener("keydown", function(event) 
 document.getElementById("username").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         document.getElementById("password").focus();
-    }
-});
-
-document.getElementById("role").addEventListener("change", function() {
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
-    if (this.value === "user") {
-        username.placeholder = "Nama User";
-        password.placeholder = "Password User";
-    } else {
-        username.placeholder = "Nama Admin";
-        password.placeholder = "Password Admin";
     }
 });
 
