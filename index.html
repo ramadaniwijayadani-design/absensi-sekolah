@@ -120,7 +120,6 @@ th {
 }
 </style>
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -247,16 +246,6 @@ let supabaseClient = null;
 
 function simpanDataLokal() {
     localStorage.setItem("absensi_lokal", JSON.stringify(data));
-}
-
-function configureSupabase() {
-    const key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
-    if (!window.SUPABASE_URL || !key) {
-        return false;
-    }
-
-    supabaseClient = window.supabase.createClient(window.SUPABASE_URL, key);
-    return true;
 }
 
 async function login() {
@@ -441,18 +430,6 @@ async function muatData() {
     tampilkan();
 }
 
-async function restoreSession() {
-    const key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
-    if (!key || !configureSupabase()) return;
-
-    const { data: sessionData } = await supabaseClient.auth.getSession();
-    if (sessionData.session) {
-        document.getElementById("loginAdmin").style.display = "none";
-        await muatData();
-    }
-}
-
-restoreSession();
 tampilkan();
 
 const savedUsername = localStorage.getItem("admin_username");
