@@ -11,19 +11,20 @@ create table if not exists public.absensi (
 alter table public.absensi enable row level security;
 
 drop policy if exists "Authenticated users can view attendance" on public.absensi;
-create policy "Authenticated users can view attendance"
-on public.absensi for select
-to authenticated
-using (true);
-
 drop policy if exists "Authenticated users can insert attendance" on public.absensi;
-create policy "Authenticated users can insert attendance"
-on public.absensi for insert
-to authenticated
-with check (true);
-
 drop policy if exists "Authenticated users can delete attendance" on public.absensi;
-create policy "Authenticated users can delete attendance"
+drop policy if exists "Public users can view attendance" on public.absensi;
+drop policy if exists "Public users can insert attendance" on public.absensi;
+drop policy if exists "Public users can delete attendance" on public.absensi;
+create policy "Public users can view attendance"
+on public.absensi for select
+to anon, authenticated
+using (true);
+create policy "Public users can insert attendance"
+on public.absensi for insert
+to anon, authenticated
+with check (true);
+create policy "Public users can delete attendance"
 on public.absensi for delete
-to authenticated
+to anon, authenticated
 using (true);
