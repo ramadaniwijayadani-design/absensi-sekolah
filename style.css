@@ -851,3 +851,71 @@ td:first-child {
         transform: none !important;
     }
 }
+
+/* TEMA HP MINIMALIS - OVERRIDE FINAL */
+@media screen and (max-width: 768px) {
+    body {
+        background: #f5f7f6 !important;
+    }
+
+    header {
+        display: none !important;
+    }
+
+    .container {
+        margin: 0 !important;
+        padding: 10px !important;
+        max-width: 100% !important;
+    }
+
+    .card {
+        padding: 14px !important;
+        border-radius: 12px !important;
+        margin-bottom: 12px !important;
+        box-shadow: none !important;
+        border: 1px solid #e5e7eb !important;
+        background: white !important;
+    }
+
+    .card h2 {
+        font-size: 18px !important;
+    }
+
+    input,
+    select {
+        padding: 10px !important;
+        border-radius: 8px !important;
+        background: white !important;
+        border: 1px solid #d1d5db !important;
+    }
+
+    button {
+        padding: 10px !important;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        font-size: 14px !important;
+    }
+
+    .stat {
+        padding: 12px !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+        background: white !important;
+    }
+
+    tbody tr {
+        padding: 8px !important;
+        border-radius: 10px !important;
+        box-shadow: none !important;
+    }
+
+    tbody td {
+        padding: 8px 0 !important;
+        font-size: 12px !important;
+    }
+
+    .hapus {
+        width: auto !important;
+        padding: 7px 12px !important;
+    }
+}
