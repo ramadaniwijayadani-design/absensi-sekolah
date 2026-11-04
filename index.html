@@ -120,6 +120,7 @@ th {
 }
 </style>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -247,7 +248,8 @@ th {
 </div>
 
 <script>
-window.SUPABASE_URL = "https://adminabsn.supabase.co";
+window.SUPABASE_URL = "https://qemdgyydnfmkmntpxtbp.supabase.co";
+window.SUPABASE_ANON_KEY = "sb_publishable_GGcvyqmkRwAUu018nVlAzA_2oZNtQhF";
 
 let data = JSON.parse(localStorage.getItem("absensi_lokal") || "[]");
 let supabaseClient = null;
@@ -255,6 +257,19 @@ let supabaseClient = null;
 function simpanDataLokal() {
     localStorage.setItem("absensi_lokal", JSON.stringify(data));
 }
+
+function configureSupabase() {
+    if (!window.supabase) {
+        return;
+    }
+
+    supabaseClient = window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+    );
+}
+
+configureSupabase();
 
 async function login() {
     const username = document.getElementById("username").value.trim();
@@ -270,6 +285,7 @@ async function login() {
         localStorage.setItem("admin_username", username);
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
+        await muatData();
         return;
     }
 
@@ -316,7 +332,7 @@ document.getElementById("formAbsensi").addEventListener("submit", async function
         });
         simpanDataLokal();
         this.reset();
-        tampilkan();
+        muatData();
         alert("Absensi berhasil disimpan!");
         return;
     }
