@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Absensi Sekolah</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef2ff;
+    color: #1e293b;
+}
+
+header {
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px #00000010;
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.stat {
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px #00000010;
+}
+
+.stat h2 {
+    color: #2563eb;
+    margin-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+th {
+    background: #eff6ff;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.hapus {
+    background: #ef4444;
+    padding: 8px;
+}
+
+@media(max-width:700px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
+</style>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="loginAdmin" style="
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#064e3b,#10b981);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9999;">
+
+    <div style="
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    width:350px;
+    max-width:90%;
+    text-align:center;
+    box-shadow:0 15px 40px #0003;">
+
+        <h2 style="color:#047857;">ADMIN LOGIN</h2>
+        <p>Absensi Sekolah</p>
+
+        <input id="username" placeholder="Username Admin">
+        <input id="password" type="password" placeholder="Password Admin">
+        <button onclick="login()">LOGIN ADMIN</button>
+        <p id="pesan" style="color:red;"></p>
+
+    </div>
+</div>
+
+<header>
+    <img src="logo.png" alt="Logo SMK Diponegoro Tulakan" class="school-logo">
+    <h1>SMK DIPONEGORO TULAKAN</h1>
+    <h2 class="school-subtitle">Sistem Absensi Sekolah</h2>
+    <p>Sistem Kehadiran Siswa Digital</p>
+    <p id="tanggal"></p>
+</header>
+
+<div class="container">
+
+    <div class="stats">
+        <div class="stat">
+            <h2 id="total">0</h2>
+            <p>Total Absen</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="hadir">0</h2>
+            <p>Hadir</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="izin">0</h2>
+            <p>Izin</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="sakit">0</h2>
+            <p>Sakit</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📝 Form Absensi</h2>
+
+        <form id="formAbsensi">
+            <input type="text" id="nama"
+                   placeholder="Nama lengkap siswa" required>
+
+            <input type="text" id="kelas"
+                   placeholder="Kelas (contoh: XI RPL 1)" required>
+
+            <select id="status">
+                <option value="Hadir">Hadir</option>
+                <option value="Izin">Izin</option>
+                <option value="Sakit">Sakit</option>
+                <option value="Alpa">Alpa</option>
+            </select>
+
+            <button type="submit">Simpan Absensi</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>📋 Data Absensi Siswa</h2>
+
+        <input type="text" id="cari"
+               placeholder="Cari nama siswa..."
+               oninput="tampilkan()">
+
+        <div style="overflow-x:auto">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Status</th>
+                        <th>Waktu</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="dataAbsensi"></tbody>
+            </table>
+        </div>
+
+        <button onclick="exportCSV()" style="margin-top:20px">
+            📥 Download Rekap Excel (CSV)
+        </button>
+    </div>
+
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("absensi")) || [];
+
+function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    const pesan = document.getElementById("pesan");
+
+    if (username === "admin" && password === "admin123") {
+        document.getElementById("loginAdmin").style.display = "none";
+        pesan.textContent = "";
+        return;
+    }
+
+    pesan.textContent = "Username atau password salah!";
+}
+
+document.getElementById("password").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        login();
+    }
+});
+
+document.getElementById("tanggal").textContent =
+    new Date().toLocaleDateString("id-ID", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+
+document.getElementById("formAbsensi").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let nama = document.getElementById("nama").value.trim();
+    let kelas = document.getElementById("kelas").value.trim();
+    let status = document.getElementById("status").value;
+
+    let waktu = new Date().toLocaleTimeString("id-ID");
+
+    data.push({
+        nama,
+        kelas,
+        status,
+        waktu,
+        tanggal: new Date().toLocaleDateString("id-ID")
+    });
+
+    localStorage.setItem("absensi", JSON.stringify(data));
+
+    this.reset();
+    tampilkan();
+
+    alert("Absensi berhasil disimpan!");
+});
+
+function tampilkan() {
+    let tbody = document.getElementById("dataAbsensi");
+    let cari = document.getElementById("cari").value.toLowerCase();
+
+    tbody.innerHTML = "";
+
+    let hasil = data.filter(d =>
+        d.nama.toLowerCase().includes(cari)
+    );
+
+    hasil.forEach((d, i) => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${d.nama}</td>
+                <td>${d.kelas}</td>
+                <td><span class="status">${d.status}</span></td>
+                <td>${d.tanggal} ${d.waktu}</td>
+                <td>
+                    <button class="hapus"
+                    onclick="hapus(${data.indexOf(d)})">
+                    Hapus
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+
+    document.getElementById("total").textContent = data.length;
+    document.getElementById("hadir").textContent =
+        data.filter(d => d.status === "Hadir").length;
+    document.getElementById("izin").textContent =
+        data.filter(d => d.status === "Izin").length;
+    document.getElementById("sakit").textContent =
+        data.filter(d => d.status === "Sakit").length;
+}
+
+function hapus(index) {
+    if(confirm("Hapus data absensi ini?")) {
+        data.splice(index, 1);
+        localStorage.setItem("absensi", JSON.stringify(data));
+        tampilkan();
+    }
+}
+
+function exportCSV() {
+    let csv = "Nama,Kelas,Status,Tanggal,Waktu\n";
+
+    data.forEach(d => {
+        csv += `${d.nama},${d.kelas},${d.status},${d.tanggal},${d.waktu}\n`;
+    });
+
+    let blob = new Blob([csv], {type: "text/csv"});
+    let link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "rekap_absensi.csv";
+    link.click();
+}
+
+tampilkan();
+</script>
+
+</body>
+</html>
