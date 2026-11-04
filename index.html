@@ -124,32 +124,18 @@ th {
 
 <body>
 
-<div id="loginAdmin" style="
-position:fixed;
-inset:0;
-background:linear-gradient(135deg,#064e3b,#10b981);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:9999;">
-
-    <div style="
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    width:350px;
-    max-width:90%;
-    text-align:center;
-    box-shadow:0 15px 40px #0003;">
-
-        <h2 style="color:#047857;">ADMIN</h2>
-        <p>Absensi Sekolah</p>
+<div id="loginAdmin">
+    <div class="login-panel">
+        <img src="logo.png" alt="Logo sekolah" class="login-logo">
+        <span class="login-badge">ADMIN PANEL</span>
+        <h2>Selamat Datang</h2>
+        <p>Masuk untuk mengelola absensi sekolah</p>
 
         <input id="username" placeholder="Nama Admin"
                autocomplete="username" autocapitalize="none" value="admin" autofocus>
         <input id="password" type="password" placeholder="Password Admin"
                autocomplete="current-password">
-        <button onclick="login()">LOGIN ADMIN</button>
+        <button onclick="login()">Masuk ke Dashboard</button>
         <p id="pesan" style="color:red;"></p>
 
     </div>
@@ -188,7 +174,13 @@ z-index:9999;">
     </div>
 
     <div class="card">
-        <h2>📝 Form Absensi</h2>
+        <div class="section-heading">
+            <span class="section-icon">+</span>
+            <div>
+                <h2>Form Absensi</h2>
+                <p>Catat kehadiran siswa dengan cepat</p>
+            </div>
+        </div>
 
         <form id="formAbsensi">
             <input type="text" id="nama"
@@ -209,7 +201,13 @@ z-index:9999;">
     </div>
 
     <div class="card">
-        <h2>📋 Data Absensi Siswa</h2>
+        <div class="section-heading">
+            <span class="section-icon">▤</span>
+            <div>
+                <h2>Data Absensi Siswa</h2>
+                <p>Pantau dan kelola seluruh data kehadiran</p>
+            </div>
+        </div>
 
         <input type="text" id="cari"
                placeholder="Cari nama siswa..."
@@ -231,8 +229,8 @@ z-index:9999;">
             </table>
         </div>
 
-        <button onclick="exportCSV()" style="margin-top:20px">
-            📥 Download Rekap Excel (CSV)
+        <button class="export-button" onclick="exportCSV()">
+            Download Rekap Excel (CSV)
         </button>
     </div>
 
