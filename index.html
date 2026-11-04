@@ -242,8 +242,12 @@ z-index:9999;">
 <script>
 window.SUPABASE_URL = "https://adminabsn.supabase.co";
 
-let data = [];
+let data = JSON.parse(localStorage.getItem("absensi_lokal") || "[]");
 let supabaseClient = null;
+
+function simpanDataLokal() {
+    localStorage.setItem("absensi_lokal", JSON.stringify(data));
+}
 
 function configureSupabase() {
     const key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
@@ -308,6 +312,22 @@ document.getElementById("formAbsensi").addEventListener("submit", async function
     }
 
     const waktuSekarang = new Date();
+    if (!supabaseClient) {
+        data.unshift({
+            id: Date.now(),
+            nama,
+            kelas,
+            status,
+            waktu: waktuSekarang.toLocaleTimeString("id-ID"),
+            tanggal: waktuSekarang.toLocaleDateString("id-ID")
+        });
+        simpanDataLokal();
+        this.reset();
+        tampilkan();
+        alert("Absensi berhasil disimpan!");
+        return;
+    }
+
     const { error } = await supabaseClient.from("absensi").insert({
         nama,
         kelas,
@@ -365,6 +385,13 @@ function tampilkan() {
 
 async function hapus(index) {
     if(confirm("Hapus data absensi ini?")) {
+        if (!supabaseClient) {
+            data.splice(index, 1);
+            simpanDataLokal();
+            tampilkan();
+            return;
+        }
+
         const { error } = await supabaseClient
             .from("absensi")
             .delete()
@@ -395,7 +422,10 @@ function exportCSV() {
 }
 
 async function muatData() {
-    if (!supabaseClient) return;
+    if (!supabaseClient) {
+        tampilkan();
+        return;
+    }
 
     const { data: records, error } = await supabaseClient
         .from("absensi")
@@ -423,6 +453,7 @@ async function restoreSession() {
 }
 
 restoreSession();
+tampilkan();
 
 const savedUsername = localStorage.getItem("admin_username");
 if (savedUsername) {
