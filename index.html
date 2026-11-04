@@ -120,6 +120,7 @@ th {
 }
 </style>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -237,20 +238,51 @@ z-index:9999;">
 </div>
 
 <script>
-let data = JSON.parse(localStorage.getItem("absensi")) || [];
+window.SUPABASE_URL = "https://adminabsn.supabase.co";
 
-function login() {
+let data = [];
+let supabaseClient = null;
+
+function configureSupabase() {
+    const key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
+    if (!window.SUPABASE_URL || !key) {
+        document.getElementById("pesan").textContent =
+            "Anon/Public Key Supabase belum dikonfigurasi.";
+        return false;
+    }
+
+    supabaseClient = window.supabase.createClient(window.SUPABASE_URL, key);
+    return true;
+}
+
+async function login() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
     const pesan = document.getElementById("pesan");
 
-    if (username === "admin" && password === "admin123") {
+    let key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
+    if (!key) {
+        key = window.prompt("Masukkan Supabase Anon/Public Key:");
+        if (!key) return;
+        localStorage.setItem("supabase_anon_key", key.trim());
+    }
+
+    if (!configureSupabase()) return;
+
+    const email = username.includes("@") ? username : `${username}@absensi.local`;
+    const { error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (!error) {
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
+        await muatData();
         return;
     }
 
-    pesan.textContent = "Username atau password salah!";
+    pesan.textContent = "Username atau password salah, atau akun belum dibuat.";
 }
 
 document.getElementById("password").addEventListener("keydown", function(event) {
@@ -267,28 +299,34 @@ document.getElementById("tanggal").textContent =
         day: "numeric"
     });
 
-document.getElementById("formAbsensi").addEventListener("submit", function(e) {
+document.getElementById("formAbsensi").addEventListener("submit", async function(e) {
     e.preventDefault();
 
     let nama = document.getElementById("nama").value.trim();
     let kelas = document.getElementById("kelas").value.trim();
     let status = document.getElementById("status").value;
 
-    let waktu = new Date().toLocaleTimeString("id-ID");
+    if (!supabaseClient) {
+        alert("Login terlebih dahulu.");
+        return;
+    }
 
-    data.push({
+    const waktuSekarang = new Date();
+    const { error } = await supabaseClient.from("absensi").insert({
         nama,
         kelas,
         status,
-        waktu,
-        tanggal: new Date().toLocaleDateString("id-ID")
+        waktu: waktuSekarang.toLocaleTimeString("id-ID"),
+        tanggal: waktuSekarang.toLocaleDateString("id-ID")
     });
 
-    localStorage.setItem("absensi", JSON.stringify(data));
+    if (error) {
+        alert(`Gagal menyimpan: ${error.message}`);
+        return;
+    }
 
     this.reset();
-    tampilkan();
-
+    await muatData();
     alert("Absensi berhasil disimpan!");
 });
 
@@ -329,11 +367,19 @@ function tampilkan() {
         data.filter(d => d.status === "Sakit").length;
 }
 
-function hapus(index) {
+async function hapus(index) {
     if(confirm("Hapus data absensi ini?")) {
-        data.splice(index, 1);
-        localStorage.setItem("absensi", JSON.stringify(data));
-        tampilkan();
+        const { error } = await supabaseClient
+            .from("absensi")
+            .delete()
+            .eq("id", data[index].id);
+
+        if (error) {
+            alert(`Gagal menghapus: ${error.message}`);
+            return;
+        }
+
+        await muatData();
     }
 }
 
@@ -352,7 +398,35 @@ function exportCSV() {
     link.click();
 }
 
-tampilkan();
+async function muatData() {
+    if (!supabaseClient) return;
+
+    const { data: records, error } = await supabaseClient
+        .from("absensi")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        alert(`Gagal memuat data: ${error.message}`);
+        return;
+    }
+
+    data = records || [];
+    tampilkan();
+}
+
+async function restoreSession() {
+    const key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
+    if (!key || !configureSupabase()) return;
+
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (sessionData.session) {
+        document.getElementById("loginAdmin").style.display = "none";
+        await muatData();
+    }
+}
+
+restoreSession();
 </script>
 
 </body>
