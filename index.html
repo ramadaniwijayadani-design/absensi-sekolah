@@ -209,9 +209,19 @@ th {
             </div>
         </div>
 
-        <input type="text" id="cari"
-               placeholder="Cari nama siswa..."
-               oninput="tampilkan()">
+        <div class="rekap-filter">
+            <input type="text" id="cari"
+                   placeholder="Cari nama siswa..."
+                   oninput="tampilkan()">
+            <select id="filterStatus" onchange="tampilkan()">
+                <option value="">Semua Status</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Izin">Izin</option>
+                <option value="Sakit">Sakit</option>
+                <option value="Alpa">Alpa</option>
+            </select>
+            <input type="date" id="filterTanggal" onchange="tampilkan()">
+        </div>
 
         <div style="overflow-x:auto">
             <table>
@@ -301,7 +311,8 @@ document.getElementById("formAbsensi").addEventListener("submit", async function
             kelas,
             status,
             waktu: waktuSekarang.toLocaleTimeString("id-ID"),
-            tanggal: waktuSekarang.toLocaleDateString("id-ID")
+            tanggal: waktuSekarang.toLocaleDateString("id-ID"),
+            tanggalKey: waktuSekarang.toISOString().slice(0, 10)
         });
         simpanDataLokal();
         this.reset();
@@ -331,12 +342,17 @@ document.getElementById("formAbsensi").addEventListener("submit", async function
 function tampilkan() {
     let tbody = document.getElementById("dataAbsensi");
     let cari = document.getElementById("cari").value.toLowerCase();
+    let filterStatus = document.getElementById("filterStatus").value;
+    let filterTanggal = document.getElementById("filterTanggal").value;
 
     tbody.innerHTML = "";
 
-    let hasil = data.filter(d =>
-        d.nama.toLowerCase().includes(cari)
-    );
+    let hasil = data.filter(d => {
+        const cocokNama = d.nama.toLowerCase().includes(cari);
+        const cocokStatus = !filterStatus || d.status === filterStatus;
+        const cocokTanggal = !filterTanggal || d.tanggalKey === filterTanggal;
+        return cocokNama && cocokStatus && cocokTanggal;
+    });
 
     hasil.forEach((d, i) => {
         tbody.innerHTML += `
