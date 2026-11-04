@@ -1,231 +1,267 @@
-/* ===============================
-   RESET & DASAR
-================================ */
+/* ========================================
+   ABSENSI SMKS DIPONEGORO
+   MODERN GREEN DASHBOARD
+======================================== */
+
+:root {
+    --primary: #059669;
+    --primary-dark: #047857;
+    --primary-light: #d1fae5;
+    --background: #f8fafc;
+    --white: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --danger: #ef4444;
+    --radius: 16px;
+}
+
 * {
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #064e3b;
-    background:
-        radial-gradient(circle at 10% 20%, rgba(16,185,129,.15), transparent 25%),
-        radial-gradient(circle at 90% 10%, rgba(5,150,105,.12), transparent 22%),
-        linear-gradient(135deg, #ecfdf5, #d1fae5);
-    min-width: 0;
-    overflow-x: hidden;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
 }
 
-/* ===============================
-   HEADER
-================================ */
+/* HEADER */
+
 header {
-    background: linear-gradient(135deg, #064e3b, #059669, #10b981);
+    background: linear-gradient(135deg, #065f46, #059669);
     color: white;
-    padding: 40px 20px;
+    padding: 35px 20px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(5,150,105,.25);
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.15);
 }
 
 header h1 {
     margin: 0;
-    font-size: 32px;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px rgba(0,0,0,.2);
-}
-
-header p {
-    opacity: .9;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .school-subtitle {
-    margin: 8px 0 2px;
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+    margin: 8px 0 0;
+}
+
+header p {
+    margin-top: 10px;
+    opacity: 0.9;
 }
 
 .school-logo {
-    width: 110px;
-    height: 110px;
+    width: 85px;
+    height: 85px;
     object-fit: contain;
     margin-bottom: 12px;
-    filter: drop-shadow(0 8px 12px rgba(0,0,0,.25));
 }
 
-/* ===============================
-   CONTAINER
-================================ */
+/* CONTAINER */
+
 .container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 35px auto;
+    max-width: 1200px;
+    margin: 30px auto;
     padding: 20px;
 }
 
-/* ===============================
-   CARD
-================================ */
-.card {
-    background: rgba(255,255,255,.95);
-    backdrop-filter: blur(8px);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(6,95,70,.08);
-    margin-bottom: 25px;
-    border: 1px solid #d1fae5;
-    transition: box-shadow .3s ease;
-}
+/* CARD */
 
-.card:hover {
-    box-shadow: 0 14px 35px rgba(6,95,70,.12);
+.card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+    transition: 0.25s;
 }
 
 .card h2 {
-    color: #047857;
     margin-top: 0;
+    color: var(--primary-dark);
+    font-size: 22px;
 }
 
-/* ===============================
-   STATISTIK
-================================ */
+.section-heading {
+    margin-bottom: 18px;
+}
+
+/* STATISTIK */
+
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 18px;
 }
 
 .stat {
-    padding: 25px 15px;
-    background: linear-gradient(145deg, #ffffff, #ecfdf5);
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(6,95,70,.08);
-    border-bottom: 4px solid #10b981;
-    transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.stat:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 25px rgba(6,95,70,.12);
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--primary);
+    transition: 0.25s;
 }
 
 .stat h2 {
-    color: #059669;
-    font-size: 32px;
     margin: 0;
+    font-size: 32px;
+    color: var(--primary);
 }
 
 .stat p {
-    color: #64748b;
-    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 0;
+    font-size: 14px;
 }
 
-/* ===============================
-   FORM
-================================ */
+/* FORM */
+
 input,
-select {
+select,
+textarea {
     width: 100%;
-    padding: 14px;
-    margin-top: 12px;
-    border-radius: 12px;
-    border: 1px solid #a7f3d0;
-    background: #f0fdf4;
+    padding: 13px 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: var(--text);
     font-size: 15px;
     outline: none;
-    transition: border-color .3s, box-shadow .3s;
+    transition: 0.2s;
 }
 
 input:focus,
-select:focus {
-    border-color: #059669;
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px #d1fae5;
 }
 
-/* ===============================
-   BUTTON
-================================ */
+/* BUTTON */
+
 button {
     width: 100%;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 12px;
+    padding: 12px 18px;
     border: none;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
+    border-radius: 10px;
+    background: var(--primary);
     color: white;
-    background: linear-gradient(135deg, #047857, #10b981);
-    box-shadow: 0 5px 15px rgba(16,185,129,.2);
-    transition: transform .2s, box-shadow .2s;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 button:hover {
-    box-shadow: 0 8px 20px rgba(16,185,129,.3);
-    transform: translateY(-2px);
+    background: var(--primary-dark);
+    transform: translateY(-1px);
 }
 
 button:active {
-    transform: scale(.98);
+    transform: scale(0.98);
 }
 
-/* ===============================
-   TABLE
-================================ */
+#formAbsensi {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#status,
+#formAbsensi button {
+    grid-column: 1 / -1;
+}
+
+#formAbsensi input,
+#formAbsensi select,
+#formAbsensi button {
+    margin-top: 0;
+}
+
+/* TOMBOL HAPUS */
+
+.hapus {
+    width: 38px;
+    min-height: 38px;
+    padding: 0;
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.hapus:hover {
+    background: #dc2626;
+    color: white;
+}
+
+/* TABEL */
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background: white;
 }
 
-th {
-    background: linear-gradient(135deg, #047857, #059669);
-    color: white;
-    padding: 15px;
-}
-
-td {
-    padding: 14px;
-    border-bottom: 1px solid #d1fae5;
-}
-
-tr:hover {
+thead {
     background: #ecfdf5;
 }
 
-/* ===============================
-   STATUS
-================================ */
+th {
+    padding: 15px;
+    text-align: left;
+    color: #047857;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* STATUS */
+
 .status {
     display: inline-block;
-    padding: 7px 12px;
+    padding: 6px 12px;
     border-radius: 20px;
     background: #d1fae5;
     color: #047857;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 700;
 }
 
-/* ===============================
-   HAPUS
-================================ */
-.hapus {
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-    padding: 8px;
+/* FILTER */
+
+.rekap-filter {
+    display: grid;
+    grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(150px, 1fr));
+    gap: 12px;
 }
 
-/* ===============================
-   LOGIN ADMIN
-================================ */
+.rekap-filter input,
+.rekap-filter select {
+    margin-top: 0;
+}
+
+/* LOGIN */
+
 #loginAdmin {
     position: fixed;
     inset: 0;
@@ -233,34 +269,167 @@ tr:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: 20px;
+    background: linear-gradient(135deg, #065f46, #059669);
+    backdrop-filter: blur(5px);
 }
 
-/* ===============================
-   RESPONSIVE TABLE & MOBILE
-================================ */
-@media(max-width:700px) {
+.login-panel {
+    width: min(390px, 100%);
+    padding: 30px;
+    text-align: center;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+}
+
+.login-logo {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+}
+
+.login-badge {
+    display: inline-block;
+    margin: 12px 0 4px;
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.login-panel h2 {
+    margin: 8px 0;
+    color: var(--primary-dark);
+}
+
+.login-panel p {
+    margin-top: 0;
+    color: var(--muted);
+}
+
+.login-panel #role,
+.login-panel input,
+.login-panel button {
+    margin-top: 12px;
+}
+
+.export-button {
+    width: auto;
+    min-width: 220px;
+    margin-top: 20px;
+    margin-left: auto;
+    display: block;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.admin-action {
+    text-align: center;
+    width: 72px;
+}
+
+body.user-mode .export-button,
+body.user-mode .admin-action {
+    display: none !important;
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+    body {
+        background: #f8fafc;
+    }
+
+    header {
+        padding: 25px 15px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    .school-logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .container {
+        margin: 12px auto;
+        padding: 12px;
+    }
+
+    .card {
+        padding: 16px;
+        margin-bottom: 14px;
+        border-radius: 14px;
+        box-shadow: none;
+    }
+
+    .card h2 {
+        font-size: 18px;
+    }
+
     .stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
 
-    header h1 {
-        font-size: 24px;
+    .stat {
+        padding: 16px 12px;
+        border-radius: 12px;
     }
 
-    .school-subtitle {
-        font-size: 15px;
-        letter-spacing: 2px;
+    .stat h2 {
+        font-size: 25px;
     }
 
-    .container {
-        margin: 20px auto;
-        padding: 10px;
+    .stat p {
+        font-size: 12px;
     }
 
-    .card {
-        padding: 18px;
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    button {
+        min-height: 42px;
+        font-size: 14px;
+    }
+
+    #formAbsensi {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .rekap-filter {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .export-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* ABSENSI MOBILE */
+
+    table {
+        font-size: 12px;
+    }
+
+    thead {
+        display: none;
     }
 
     table,
@@ -269,778 +438,78 @@ tr:hover {
         width: 100%;
     }
 
-    thead {
-        display: none;
-    }
-
     tbody tr {
         display: block;
-        margin-bottom: 14px;
-        padding: 8px 12px;
-        border: 1px solid #a7f3d0;
-        border-radius: 14px;
+        padding: 10px 14px;
+        margin-bottom: 12px;
         background: white;
+        border: 1px solid var(--border);
+        border-radius: 12px;
     }
 
     tbody td {
         display: grid;
-        grid-template-columns: 92px minmax(0, 1fr);
+        grid-template-columns: 85px minmax(0, 1fr);
         align-items: center;
         gap: 8px;
-        min-height: 42px;
-        padding: 8px 0;
-        border-bottom: 1px solid #d1fae5;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
         text-align: right;
         overflow-wrap: anywhere;
+    }
+
+    tbody td::before {
+        content: attr(data-label);
+        text-align: left;
+        font-weight: 600;
+        color: var(--muted);
     }
 
     tbody td:last-child {
         border-bottom: none;
     }
 
-    tbody td::before {
-        content: attr(data-label);
-        color: #047857;
-        font-weight: bold;
-        text-align: left;
-    }
-
     .hapus {
-        min-height: 44px;
-        margin-top: 0;
-    }
-
-    input,
-    select,
-    button {
-        min-height: 44px;
-        font-size: 16px;
-    }
-
-    .school-logo {
-        width: 85px;
-        height: 85px;
-    }
-}
-
-/* ===============================
-   MOBILE KECIL
-================================ */
-@media(max-width:420px) {
-    header {
-        padding: 28px 12px 24px;
-    }
-
-    header h1 {
-        font-size: 21px;
-    }
-
-    .school-logo {
-        width: 72px;
-        height: 72px;
-    }
-
-    .stats {
-        gap: 8px;
-    }
-
-    .stat {
-        padding: 18px 8px;
-    }
-
-    .stat h2 {
-        font-size: 26px;
-    }
-
-    .card {
-        padding: 16px 14px;
-        border-radius: 16px;
-    }
-
-    tbody td {
-        grid-template-columns: 78px minmax(0, 1fr);
-    }
-}
-
-/* Modern dashboard refresh */
-:root {
-    --green-950: #052e2b;
-    --green-800: #166534;
-    --green-700: #15803d;
-    --green-600: #16a34a;
-    --green-100: #dcfce7;
-    --ink: #17211f;
-    --muted: #64748b;
-    --surface: rgba(255,255,255,.94);
-}
-
-body {
-    background:
-        radial-gradient(circle at 8% 12%, rgba(52,211,153,.16), transparent 25rem),
-        radial-gradient(circle at 92% 8%, rgba(13,148,136,.12), transparent 22rem),
-        #f1f7f5;
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-}
-
-#loginAdmin {
-    background:
-        linear-gradient(rgba(4,47,46,.78), rgba(6,95,70,.88)),
-        radial-gradient(circle at 20% 20%, #34d399, transparent 35%);
-    backdrop-filter: blur(12px);
-}
-
-.login-panel {
-    width: min(420px, calc(100% - 30px));
-    padding: 32px;
-    border: 1px solid rgba(255,255,255,.75);
-    border-radius: 28px;
-    background: rgba(255,255,255,.97);
-    box-shadow: 0 24px 70px rgba(2,44,34,.28);
-    text-align: left;
-}
-
-.login-logo {
-    display: block;
-    width: 76px;
-    height: 76px;
-    object-fit: contain;
-    margin: 0 auto 16px;
-}
-
-.login-badge {
-    display: block;
-    width: fit-content;
-    margin: 0 auto 10px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--green-100);
-    color: var(--green-800);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-}
-
-.login-panel h2 {
-    margin: 8px 0 4px;
-    text-align: center;
-    color: var(--ink);
-    font-size: 28px;
-}
-
-.login-panel > p:not(#pesan) {
-    margin: 0 0 20px;
-    text-align: center;
-    color: var(--muted);
-}
-
-.login-panel input {
-    height: 52px;
-    margin-top: 12px;
-    padding: 0 16px;
-    border-radius: 14px;
-    background: #f8fafc;
-}
-
-.login-panel button {
-    height: 52px;
-    margin-top: 18px;
-    border-radius: 14px;
-}
-
-#pesan {
-    min-height: 20px;
-    margin: 14px 0 0;
-    text-align: center;
-}
-
-header {
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 20px;
-    background: linear-gradient(135deg, #052e2b 0%, #047857 58%, #10b981 100%);
-}
-
-header::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: .14;
-    background-image: radial-gradient(circle, white 1px, transparent 1px);
-    background-size: 22px 22px;
-    pointer-events: none;
-}
-
-header > * {
-    position: relative;
-    z-index: 1;
-}
-
-.school-logo {
-    width: 92px;
-    height: 92px;
-    margin-bottom: 10px;
-}
-
-header h1 {
-    font-size: clamp(26px, 5vw, 38px);
-}
-
-.school-subtitle {
-    letter-spacing: 5px;
-}
-
-.container {
-    margin-top: 28px;
-}
-
-.card,
-.stat {
-    border: 1px solid rgba(167,243,208,.72);
-    background: var(--surface);
-    box-shadow: 0 14px 40px rgba(15,118,110,.09);
-}
-
-.stat {
-    position: relative;
-    overflow: hidden;
-    border-bottom-width: 1px;
-}
-
-.stat::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #059669, #34d399);
-}
-
-.section-heading {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 18px;
-}
-
-.section-heading h2 {
-    margin: 0;
-    color: var(--ink);
-}
-
-.section-heading p {
-    margin: 3px 0 0;
-    color: var(--muted);
-    font-size: 14px;
-}
-
-.section-icon {
-    flex: 0 0 44px;
-    height: 44px;
-    display: grid;
-    place-items: center;
-    border-radius: 14px;
-    background: var(--green-100);
-    color: var(--green-800);
-    font-size: 24px;
-    font-weight: 800;
-}
-
-#formAbsensi {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 14px;
-}
-
-#status,
-#formAbsensi button {
-    grid-column: 1 / -1;
-}
-
-input,
-select {
-    border-radius: 14px;
-    background-color: #f8fafc;
-}
-
-button {
-    border-radius: 14px;
-}
-
-.export-button {
-    width: auto;
-    min-width: 220px;
-    margin-left: auto;
-    display: block;
-    background: #0f766e;
-}
-
-table {
-    border-radius: 14px;
-    overflow: hidden;
-}
-
-th:first-child,
-td:first-child {
-    text-align: center;
-}
-
-.hapus {
-    width: 72px;
-    height: 38px;
-    min-height: 38px;
-    margin: 0;
-    padding: 0;
-}
-
-@media(max-width:700px) {
-    header {
-        min-height: 220px;
-    }
-
-    .school-logo {
-        width: 78px;
-        height: 78px;
+        width: 38px;
+        min-height: 36px;
+        padding: 0;
+        margin-left: auto;
     }
 
     .login-panel {
-        padding: 26px 22px;
-        border-radius: 22px;
-    }
-
-    #formAbsensi {
-        grid-template-columns: 1fr;
-    }
-
-    #status,
-    #formAbsensi button {
-        grid-column: auto;
-    }
-
-    .export-button {
-        width: 100%;
-    }
-
-    .section-heading p {
-        font-size: 13px;
+        width: calc(100% - 30px);
+        padding: 22px;
     }
 }
 
-.rekap-filter {
-    display: grid;
-    grid-template-columns: minmax(180px, 2fr) repeat(3, minmax(150px, 1fr));
-    gap: 12px;
-    margin-top: 18px;
-}
+/* HP KECIL */
 
-.rekap-filter input,
-.rekap-filter select {
-    margin-top: 0;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-.admin-action {
-    text-align: center;
-    width: 72px;
-}
-
-.hapus {
-    width: 38px;
-    height: 38px;
-    margin: 0 auto;
-    padding: 0;
-    border-radius: 10px;
-    font-size: 17px;
-    line-height: 1;
-}
-
-@media(max-width:700px) {
-    .rekap-filter {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        margin-top: 12px;
-    }
-}
-
-@media(max-width:700px) {
-    .admin-action {
-        display: none;
-    }
-
-    .admin-mode .admin-action {
-        display: grid;
-    }
-
-    tbody tr {
-        margin-bottom: 10px;
-        padding: 12px;
-    }
-
-    tbody td {
-        grid-template-columns: 76px minmax(0, 1fr);
-        min-height: 34px;
-        padding: 5px 0;
-        gap: 6px;
-        font-size: 14px;
-    }
-
-    .rekap-filter input,
-    .rekap-filter select {
-        margin: 0;
-    }
-
-    .section-heading {
-        margin-bottom: 12px;
-    }
-
-    .section-heading h2 {
-        font-size: 22px;
-    }
-
-    .export-button {
-        min-height: 46px;
-        margin-top: 16px;
-    }
-}
-
-/* ===== TEMA SIMPLE MOBILE ABSENSI ===== */
-
-@media (max-width: 768px) {
-    body {
-        background: #f8fafc !important;
-        color: #1e293b;
-        font-family: Arial, sans-serif;
-    }
-
-    header {
-        padding: 25px 15px !important;
-        background: #ffffff !important;
-        color: #065f46 !important;
-        box-shadow: none !important;
-        border-bottom: 1px solid #e5e7eb;
-    }
-
+@media (max-width: 420px) {
     header h1 {
-        font-size: 22px !important;
-        letter-spacing: 0 !important;
-        text-shadow: none !important;
+        font-size: 20px;
     }
 
     .container {
-        margin: 15px auto !important;
-        padding: 12px !important;
+        padding: 9px;
     }
 
     .card {
-        background: #ffffff !important;
-        padding: 18px !important;
-        border-radius: 14px !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
-        border: 1px solid #e5e7eb !important;
-        margin-bottom: 15px !important;
-        backdrop-filter: none !important;
-    }
-
-    .card h2 {
-        font-size: 19px;
-        color: #047857 !important;
-    }
-
-    input,
-    select {
-        background: #ffffff !important;
-        border: 1px solid #d1d5db !important;
-        border-radius: 10px !important;
-        padding: 12px !important;
-        font-size: 14px !important;
-        margin-top: 10px !important;
-    }
-
-    input:focus,
-    select:focus {
-        border-color: #059669 !important;
-        box-shadow: 0 0 0 2px #d1fae5 !important;
-    }
-
-    button {
-        background: #059669 !important;
-        border-radius: 10px !important;
-        box-shadow: none !important;
-        font-size: 14px !important;
-        padding: 12px !important;
-        margin-top: 10px !important;
+        padding: 14px;
     }
 
     .stats {
-        gap: 10px !important;
+        gap: 8px;
     }
 
     .stat {
-        background: #ffffff !important;
-        border: 1px solid #e5e7eb !important;
-        border-bottom: 3px solid #10b981 !important;
-        border-radius: 12px !important;
-        box-shadow: none !important;
-        padding: 16px 8px !important;
+        padding: 14px 8px;
     }
 
     .stat h2 {
-        font-size: 24px !important;
-        color: #059669 !important;
-    }
-
-    tbody tr {
-        background: #ffffff !important;
-        border: 1px solid #e5e7eb !important;
-        border-radius: 12px !important;
-        padding: 10px 14px !important;
-        margin-bottom: 12px !important;
-        box-shadow: none !important;
+        font-size: 23px;
     }
 
     tbody td {
-        padding: 10px 0 !important;
-        min-height: 38px !important;
-        border-bottom: 1px solid #f1f5f9 !important;
-        font-size: 13px !important;
+        grid-template-columns: 75px minmax(0, 1fr);
     }
-
-    tbody td::before {
-        color: #64748b !important;
-        font-size: 12px !important;
-    }
-
-    tbody td:last-child {
-        border-bottom: none !important;
-    }
-
-    .status {
-        background: #dcfce7 !important;
-        color: #15803d !important;
-        border-radius: 6px !important;
-        padding: 5px 10px !important;
-    }
-
-    .hapus {
-        width: 38px !important;
-        min-width: 38px !important;
-        height: 38px !important;
-        padding: 0 !important;
-        background: #ef4444 !important;
-        border-radius: 8px !important;
-        font-size: 16px !important;
-    }
-
-    .card:hover,
-    .stat:hover,
-    button:hover {
-        transform: none !important;
-    }
-}
-
-/* TEMA HP MINIMALIS - OVERRIDE FINAL */
-@media screen and (max-width: 768px) {
-    body {
-        background: #f5f7f6 !important;
-    }
-
-    header {
-        display: none !important;
-    }
-
-    .container {
-        margin: 0 !important;
-        padding: 10px !important;
-        max-width: 100% !important;
-    }
-
-    .card {
-        padding: 14px !important;
-        border-radius: 12px !important;
-        margin-bottom: 12px !important;
-        box-shadow: none !important;
-        border: 1px solid #e5e7eb !important;
-        background: white !important;
-    }
-
-    .card h2 {
-        font-size: 18px !important;
-    }
-
-    input,
-    select {
-        padding: 10px !important;
-        border-radius: 8px !important;
-        background: white !important;
-        border: 1px solid #d1d5db !important;
-    }
-
-    button {
-        padding: 10px !important;
-        border-radius: 8px !important;
-        box-shadow: none !important;
-        font-size: 14px !important;
-    }
-
-    .stat {
-        padding: 12px !important;
-        border-radius: 10px !important;
-        box-shadow: none !important;
-        background: white !important;
-    }
-
-    tbody tr {
-        padding: 8px !important;
-        border-radius: 10px !important;
-        box-shadow: none !important;
-    }
-
-    tbody td {
-        padding: 8px 0 !important;
-        font-size: 12px !important;
-    }
-
-    .hapus {
-        width: auto !important;
-        padding: 7px 12px !important;
-    }
-}
-
-/* TEMA MODERN HIJAU LOGO SEKOLAH */
-@media screen and (max-width: 768px) {
-    :root {
-        --school-green: #087a3b;
-        --school-green-dark: #07552c;
-        --school-green-soft: #eaf5ee;
-        --school-yellow: #d9e600;
-        --surface: #ffffff;
-    }
-
-    body {
-        background: #f1f5f2 !important;
-        color: #173126 !important;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
-
-    .container {
-        padding: 12px !important;
-    }
-
-    .card {
-        border: 1px solid #dfe8e2 !important;
-        border-radius: 18px !important;
-        box-shadow: 0 8px 24px rgba(7, 85, 44, 0.07) !important;
-        overflow: hidden;
-    }
-
-    .card h2 {
-        color: var(--school-green-dark) !important;
-        font-weight: 800 !important;
-    }
-
-    .stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px !important;
-    }
-
-    .stat {
-        min-height: 92px;
-        border: 1px solid #dfe8e2 !important;
-        border-bottom: 4px solid var(--school-green) !important;
-        border-radius: 16px !important;
-        box-shadow: 0 6px 18px rgba(7, 85, 44, 0.06) !important;
-    }
-
-    .stat::before {
-        height: 3px;
-        background: var(--school-yellow);
-    }
-
-    .stat h2 {
-        color: var(--school-green) !important;
-        font-size: 28px !important;
-    }
-
-    input,
-    select {
-        min-height: 46px;
-        border: 1px solid #cddbd3 !important;
-        border-radius: 12px !important;
-        background: #fbfdfc !important;
-    }
-
-    input:focus,
-    select:focus {
-        border-color: var(--school-green) !important;
-        box-shadow: 0 0 0 3px rgba(8, 122, 59, 0.12) !important;
-    }
-
-    button {
-        min-height: 46px;
-        border-radius: 12px !important;
-        background: linear-gradient(135deg, var(--school-green-dark), var(--school-green)) !important;
-        box-shadow: 0 7px 16px rgba(7, 85, 44, 0.18) !important;
-    }
-
-    tbody tr {
-        border: 1px solid #dfe8e2 !important;
-        border-radius: 16px !important;
-        box-shadow: 0 5px 16px rgba(7, 85, 44, 0.05) !important;
-        padding: 12px !important;
-    }
-
-    tbody td {
-        min-height: 36px;
-        border-bottom-color: #edf1ee !important;
-    }
-
-    tbody td::before {
-        color: #60766a !important;
-        font-size: 11px !important;
-        text-transform: uppercase;
-        letter-spacing: 0.3px;
-    }
-
-    .status {
-        background: var(--school-green-soft) !important;
-        border: 1px solid #cfe3d6;
-        color: var(--school-green-dark) !important;
-        border-radius: 999px !important;
-        font-weight: 700;
-    }
-
-    .hapus {
-        min-width: 38px !important;
-        background: #ef4444 !important;
-        box-shadow: none !important;
-    }
-
-    .export-button {
-        background: var(--school-green-dark) !important;
-        border-radius: 12px !important;
-        box-shadow: 0 7px 16px rgba(7, 85, 44, 0.18) !important;
-    }
-}
-
-body.user-mode .export-button,
-body.user-mode .admin-action {
-    display: none !important;
-}
-
-.login-panel #role {
-    margin-bottom: 2px;
 }
