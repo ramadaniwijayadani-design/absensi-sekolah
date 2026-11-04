@@ -150,9 +150,6 @@ z-index:9999;">
                autocomplete="username" autocapitalize="none" value="admin" autofocus>
         <input id="password" type="password" placeholder="Password Admin"
                autocomplete="current-password">
-        <input id="supabaseKey" type="password"
-               placeholder="Supabase Anon/Public Key"
-               autocomplete="off" autocapitalize="none">
         <button onclick="login()">LOGIN ADMIN</button>
         <p id="pesan" style="color:red;"></p>
 
@@ -271,11 +268,9 @@ async function login() {
     }
 
     let key = window.SUPABASE_ANON_KEY ||
-        document.getElementById("supabaseKey").value.trim() ||
         localStorage.getItem("supabase_anon_key");
     if (!key) {
-        pesan.textContent = "Isi Supabase Anon/Public Key terlebih dahulu.";
-        document.getElementById("supabaseKey").focus();
+        pesan.textContent = "Konfigurasi database belum tersedia di perangkat ini.";
         return;
     }
     if (!window.SUPABASE_ANON_KEY) {
@@ -304,12 +299,6 @@ async function login() {
 }
 
 document.getElementById("password").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        login();
-    }
-});
-
-document.getElementById("supabaseKey").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         login();
     }
@@ -463,10 +452,6 @@ if (savedUsername) {
     document.getElementById("username").value = savedUsername;
 }
 
-const savedKey = localStorage.getItem("supabase_anon_key");
-if (savedKey) {
-    document.getElementById("supabaseKey").value = savedKey;
-}
 </script>
 
 </body>
