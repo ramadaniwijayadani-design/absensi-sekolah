@@ -475,6 +475,22 @@ async function muatData() {
 }
 
 tampilkan();
+muatData().catch(() => {
+    tampilkan();
+});
+
+if (supabaseClient && typeof supabaseClient.channel === "function") {
+    supabaseClient
+        .channel("absensi-cloud-sync")
+        .on("postgres_changes", {
+            event: "*",
+            schema: "public",
+            table: "absensi"
+        }, () => {
+            muatData().catch(() => {});
+        })
+        .subscribe();
+}
 
 const savedUsername = localStorage.getItem("admin_username");
 if (savedUsername) {
