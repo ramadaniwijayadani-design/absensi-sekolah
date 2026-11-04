@@ -919,3 +919,119 @@ td:first-child {
         padding: 7px 12px !important;
     }
 }
+
+/* TEMA MODERN HIJAU LOGO SEKOLAH */
+@media screen and (max-width: 768px) {
+    :root {
+        --school-green: #087a3b;
+        --school-green-dark: #07552c;
+        --school-green-soft: #eaf5ee;
+        --school-yellow: #d9e600;
+        --surface: #ffffff;
+    }
+
+    body {
+        background: #f1f5f2 !important;
+        color: #173126 !important;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .container {
+        padding: 12px !important;
+    }
+
+    .card {
+        border: 1px solid #dfe8e2 !important;
+        border-radius: 18px !important;
+        box-shadow: 0 8px 24px rgba(7, 85, 44, 0.07) !important;
+        overflow: hidden;
+    }
+
+    .card h2 {
+        color: var(--school-green-dark) !important;
+        font-weight: 800 !important;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px !important;
+    }
+
+    .stat {
+        min-height: 92px;
+        border: 1px solid #dfe8e2 !important;
+        border-bottom: 4px solid var(--school-green) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 6px 18px rgba(7, 85, 44, 0.06) !important;
+    }
+
+    .stat::before {
+        height: 3px;
+        background: var(--school-yellow);
+    }
+
+    .stat h2 {
+        color: var(--school-green) !important;
+        font-size: 28px !important;
+    }
+
+    input,
+    select {
+        min-height: 46px;
+        border: 1px solid #cddbd3 !important;
+        border-radius: 12px !important;
+        background: #fbfdfc !important;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: var(--school-green) !important;
+        box-shadow: 0 0 0 3px rgba(8, 122, 59, 0.12) !important;
+    }
+
+    button {
+        min-height: 46px;
+        border-radius: 12px !important;
+        background: linear-gradient(135deg, var(--school-green-dark), var(--school-green)) !important;
+        box-shadow: 0 7px 16px rgba(7, 85, 44, 0.18) !important;
+    }
+
+    tbody tr {
+        border: 1px solid #dfe8e2 !important;
+        border-radius: 16px !important;
+        box-shadow: 0 5px 16px rgba(7, 85, 44, 0.05) !important;
+        padding: 12px !important;
+    }
+
+    tbody td {
+        min-height: 36px;
+        border-bottom-color: #edf1ee !important;
+    }
+
+    tbody td::before {
+        color: #60766a !important;
+        font-size: 11px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .status {
+        background: var(--school-green-soft) !important;
+        border: 1px solid #cfe3d6;
+        color: var(--school-green-dark) !important;
+        border-radius: 999px !important;
+        font-weight: 700;
+    }
+
+    .hapus {
+        min-width: 38px !important;
+        background: #ef4444 !important;
+        box-shadow: none !important;
+    }
+
+    .export-button {
+        background: var(--school-green-dark) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 7px 16px rgba(7, 85, 44, 0.18) !important;
+    }
+}
