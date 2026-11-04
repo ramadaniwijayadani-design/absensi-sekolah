@@ -248,8 +248,6 @@ let supabaseClient = null;
 function configureSupabase() {
     const key = window.SUPABASE_ANON_KEY || localStorage.getItem("supabase_anon_key");
     if (!window.SUPABASE_URL || !key) {
-        document.getElementById("pesan").textContent =
-            "Anon/Public Key Supabase belum dikonfigurasi.";
         return false;
     }
 
@@ -271,9 +269,6 @@ async function login() {
         localStorage.setItem("admin_username", username);
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
-        if (configureSupabase()) {
-            await muatData();
-        }
         return;
     }
 
