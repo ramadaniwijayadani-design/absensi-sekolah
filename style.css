@@ -1035,3 +1035,12 @@ td:first-child {
         box-shadow: 0 7px 16px rgba(7, 85, 44, 0.18) !important;
     }
 }
+
+body.user-mode .export-button,
+body.user-mode .admin-action {
+    display: none !important;
+}
+
+.login-panel #role {
+    margin-bottom: 2px;
+}

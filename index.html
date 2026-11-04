@@ -119,7 +119,7 @@ th {
     }
 }
 </style>
-<link rel="stylesheet" href="style.css?v=modern-school-green-20261104">
+<link rel="stylesheet" href="style.css?v=admin-user-20261104">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -128,10 +128,14 @@ th {
 <div id="loginAdmin">
     <div class="login-panel">
         <img src="logo.png" alt="Logo sekolah" class="login-logo">
-        <span class="login-badge">ADMIN PANEL</span>
+        <span class="login-badge">ABSENSI SEKOLAH</span>
         <h2>Selamat Datang</h2>
         <p>Masuk untuk mengelola absensi sekolah</p>
 
+        <select id="role">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
         <input id="username" placeholder="Nama Admin"
                autocomplete="username" autocapitalize="none" value="admin" autofocus>
         <input id="password" type="password" placeholder="Password Admin"
@@ -252,6 +256,7 @@ window.SUPABASE_ANON_KEY = "sb_publishable_GGcvyqmkRwAUu018nVlAzA_2oZNtQhF";
 let data = JSON.parse(localStorage.getItem("absensi_lokal") || "[]");
 let supabaseClient = null;
 let isAdmin = false;
+let currentRole = "";
 
 function simpanDataLokal() {
     localStorage.setItem("absensi_lokal", JSON.stringify(data));
@@ -273,6 +278,7 @@ configureSupabase();
 async function login() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
+    const role = document.getElementById("role").value;
     const pesan = document.getElementById("pesan");
 
     if (!username || !password) {
@@ -280,10 +286,25 @@ async function login() {
         return;
     }
 
-    if (username === "admin" && (password === "admin123" || password === "admin")) {
+    if (role === "admin" && username === "admin" && (password === "admin123" || password === "admin")) {
         isAdmin = true;
+        currentRole = "admin";
         document.body.classList.add("admin-mode");
+        document.body.classList.add("logged-in");
         localStorage.setItem("admin_username", username);
+        sessionStorage.setItem("login_role", "admin");
+        document.getElementById("loginAdmin").style.display = "none";
+        pesan.textContent = "";
+        await muatData();
+        return;
+    }
+
+    if (role === "user" && username === "user" && password === "user123") {
+        isAdmin = false;
+        currentRole = "user";
+        document.body.classList.remove("admin-mode");
+        document.body.classList.add("logged-in", "user-mode");
+        sessionStorage.setItem("login_role", "user");
         document.getElementById("loginAdmin").style.display = "none";
         pesan.textContent = "";
         await muatData();
@@ -302,6 +323,18 @@ document.getElementById("password").addEventListener("keydown", function(event) 
 document.getElementById("username").addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
         document.getElementById("password").focus();
+    }
+});
+
+document.getElementById("role").addEventListener("change", function() {
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+    if (this.value === "user") {
+        username.placeholder = "Nama User";
+        password.placeholder = "Password User";
+    } else {
+        username.placeholder = "Nama Admin";
+        password.placeholder = "Password Admin";
     }
 });
 
